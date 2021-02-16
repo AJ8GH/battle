@@ -1,14 +1,11 @@
 require 'sinatra'
-require 'dotenv'
-
-Dotenv.load
-
 
 class Battle < Sinatra::Base
   configure do
     enable :sessions
+    set :session_secret, ENV['SESSION_SECRET']
   end
-  
+
   get '/test' do
     'Testing infrastructure working!'
   end
@@ -17,9 +14,12 @@ class Battle < Sinatra::Base
     erb :index
   end
 
-  post '/players' do
-    @player_1 = params[:player_1_name]
-    @player_2 = params[:player_2_name]
-    erb :players
+  post '/play' do
+    session[:player_1_name] = params[:player_1_name]
+    session[:player_2_name] = params[:player_2_name]
+  end
+
+  get '/play' do
+    erb :play
   end
 end
