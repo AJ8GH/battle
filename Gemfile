@@ -4,5 +4,6 @@ gem 'sinatra'
 
 group :test, :development do
   gem 'capybara'
+  gem 'dotenv'
   gem 'rspec'
 end
