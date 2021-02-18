@@ -6,10 +6,6 @@ class Battle < Sinatra::Base
     set :session_secret, ENV['SESSION_SECRET']
   end
 
-  get '/test' do
-    'Testing infrastructure working!'
-  end
-
   get '/' do
     erb :index
   end
@@ -25,4 +21,6 @@ class Battle < Sinatra::Base
     @player_2_name = session[:player_2_name]
     erb :play
   end
+  
+  run! if app_file == $0
 end
