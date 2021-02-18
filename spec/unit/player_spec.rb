@@ -1,5 +1,6 @@
 describe Player do
   subject { described_class.new('Frank') }
+  let(:player) { instance_double(Player, take_damage: nil) }
 
   describe '#name' do
     it 'returns player name' do
@@ -15,8 +16,14 @@ describe Player do
 
   describe '#take_damage' do
     it 'reduces hp by 10' do
-      subject.take_damage
-      expect(subject.hp).to be 90
+      expect { subject.take_damage }.to change { subject.hp }.by -10
+    end
+  end
+
+  describe '#attack' do
+    it 'causes damage to other player' do
+      expect(player).to receive :take_damage
+      subject.attack(player)
     end
   end
 end
