@@ -10,13 +10,13 @@ describe Player do
 
   describe '#hp' do
     it 'returns player hp' do
-      expect(subject.hp).to be 100
+      expect(subject.hit_points).to be 100
     end
   end
 
   describe '#take_damage' do
     it 'reduces hp by 10' do
-      expect { subject.take_damage }.to change { subject.hp }.by -10
+      expect { subject.take_damage }.to change { subject.hit_points }.by -10
     end
   end
 
