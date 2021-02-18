@@ -19,11 +19,4 @@ describe Player do
       expect { subject.take_damage }.to change { subject.hit_points }.by -10
     end
   end
-
-  describe '#attack' do
-    it 'causes damage to other player' do
-      expect(player).to receive :take_damage
-      subject.attack(player)
-    end
-  end
 end

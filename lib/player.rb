@@ -12,10 +12,6 @@ class Player
     self.hit_points -= 10
   end
 
-  def attack(player)
-    player.take_damage
-  end
-
   private
 
   attr_writer :hit_points
