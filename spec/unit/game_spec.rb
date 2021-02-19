@@ -56,10 +56,15 @@ describe Game do
     end
   end
 
-  describe '#lose_message' do
+  describe '#turn_message' do
     it 'declares current player lost if they are dead' do
       allow(player_1).to receive(:dead?) { true }
-      expect(subject.lose_message).to eq "Frank lost!"
+      expect(subject.turn_message).to eq "Frank lost!"
+    end
+
+    it 'declares current player turn if they are alive' do
+      allow(player_1).to receive(:dead?) { false }
+      expect(subject.turn_message).to eq "Frank's turn"
     end
   end
 end

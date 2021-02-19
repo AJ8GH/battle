@@ -20,8 +20,9 @@ class Game
     end
   end
 
-  def lose_message
-    "#{@current_player.name} lost!" if current_player.dead?
+  def turn_message
+    return "#{@current_player.name} lost!" if current_player.dead?
+    "#{@current_player.name}'s turn"
   end
 
   private
