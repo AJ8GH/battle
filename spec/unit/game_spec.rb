@@ -1,6 +1,6 @@
 describe Game do
   let(:player_1) { instance_double(Player, take_damage: nil, name: 'Frank') }
-  let(:player_2) { instance_double(Player, take_damage: nil) }
+  let(:player_2) { instance_double(Player, take_damage: nil, name: 'Abigail') }
   subject        { described_class.new(player_1, player_2) }
 
   describe '#attack' do
@@ -57,14 +57,47 @@ describe Game do
   end
 
   describe '#turn_message' do
-    it 'declares current player lost if they are dead' do
-      allow(player_1).to receive(:dead?) { true }
-      expect(subject.turn_message).to eq "Frank lost!"
+    it 'declares current player turn' do
+      expect(subject.turn_message).to eq "Frank's turn"
     end
 
-    it 'declares current player turn if they are alive' do
+    it 'works for other player too' do
+      subject.switch_turns
+      expect(subject.turn_message).to eq "Abigail's turn"
+    end
+  end
+
+  describe '#game_over?' do
+    it 'returns true if player 1 is dead' do
+      allow(player_1).to receive(:dead?) { true }
+      allow(player_2).to receive(:dead?) { false }
+      expect(subject).to be_game_over
+    end
+
+    it 'returns true if player 2 is dead' do
+      allow(player_2).to receive(:dead?) { true }
       allow(player_1).to receive(:dead?) { false }
-      expect(subject.turn_message).to eq "Frank's turn"
+      expect(subject).to be_game_over
+    end
+
+    it 'returns false if both playes alive' do
+      allow(player_2).to receive(:dead?) { false }
+      allow(player_1).to receive(:dead?) { false }
+      expect(subject).not_to be_game_over
+    end
+  end
+
+  describe '#losing_message' do
+    it 'states the current player lost if they are dead' do
+      allow(player_1).to receive(:dead?) { true }
+      allow(player_2).to receive(:dead?) { false }
+      expect(subject.losing_message).to eq 'Frank lost!'
+    end
+
+    it 'states the other player lost if they are dead' do
+      allow(player_2).to receive(:dead?) { true }
+      allow(player_1).to receive(:dead?) { false }
+      expect(subject.losing_message).to eq 'Abigail lost!'
     end
   end
 end

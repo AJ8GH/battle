@@ -21,8 +21,16 @@ class Game
   end
 
   def turn_message
-    return "#{@current_player.name} lost!" if current_player.dead?
     "#{@current_player.name}'s turn"
+  end
+
+  def game_over?
+    [player_1, player_2].any? { |player| player.dead? }
+  end
+
+  def losing_message
+    loser = [player_1, player_2].select { |player| player.dead? }.pop
+    "#{loser.name} lost!"
   end
 
   private
