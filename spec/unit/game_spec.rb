@@ -22,9 +22,15 @@ describe Game do
     end
   end
 
-  describe 'current_player' do
-    it 'returns the current player' do
+  describe '#current_player' do
+    it 'returns current player' do
       expect(subject.current_player).to be player_1
+    end
+  end
+
+  describe '#other_player' do
+    it 'returns the other player' do
+      expect(subject.other_player).to be player_2
     end
   end
 
@@ -34,9 +40,19 @@ describe Game do
       expect(subject.current_player).to be player_2
     end
 
-    it 'after 2 turns, changes it back to player 1' do
+    it 'after 2 turns, changes current player back to player 1' do
       2.times { subject.switch_turns }
       expect(subject.current_player).to be player_1
+    end
+
+    it 'changes the other player' do
+      subject.switch_turns
+      expect(subject.other_player).to be player_1
+    end
+
+    it 'after 2 turns, changes other player back to player 2' do
+      2.times { subject.switch_turns }
+      expect(subject.other_player).to be player_2
     end
   end
 end
