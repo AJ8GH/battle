@@ -13,4 +13,16 @@ feature 'switching turns' do
     expect(page).not_to have_content 'Frank attacked Abigail!'
     expect(page).to have_content 'Abigail attacked Frank!'
   end
+
+  scenario 'turn indicators' do
+    sign_up_and_play
+    expect(page).to have_content "Frank's turn"
+  end
+
+  scenario 'player 2 gets attack confirmation' do
+    sign_up_and_play
+    attack_and_click_ok
+    expect(page).not_to have_content "Frank's turn"
+    expect(page).to have_content "Abigail's turn"
+  end
 end
