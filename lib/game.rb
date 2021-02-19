@@ -20,6 +20,10 @@ class Game
     end
   end
 
+  def lose_message
+    "#{@current_player.name} lost!" if current_player.dead?
+  end
+
   private
 
   attr_writer :other_player, :current_player

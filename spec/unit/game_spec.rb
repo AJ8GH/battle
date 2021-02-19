@@ -1,5 +1,5 @@
 describe Game do
-  let(:player_1) { instance_double(Player, take_damage: nil) }
+  let(:player_1) { instance_double(Player, take_damage: nil, name: 'Frank') }
   let(:player_2) { instance_double(Player, take_damage: nil) }
   subject        { described_class.new(player_1, player_2) }
 
@@ -53,6 +53,13 @@ describe Game do
     it 'after 2 turns, changes other player back to player 2' do
       2.times { subject.switch_turns }
       expect(subject.other_player).to be player_2
+    end
+  end
+
+  describe '#lose_message' do
+    it 'declares current player lost if they are dead' do
+      allow(player_1).to receive(:dead?) { true }
+      expect(subject.lose_message).to eq "Frank lost!"
     end
   end
 end

@@ -1,5 +1,5 @@
 describe Player do
-  subject { described_class.new('Frank') }
+  subject      { described_class.new('Frank') }
   let(:player) { instance_double(Player, take_damage: nil) }
 
   describe '#name' do
@@ -17,6 +17,23 @@ describe Player do
   describe '#take_damage' do
     it 'reduces hp by 10' do
       expect { subject.take_damage }.to change { subject.hit_points }.by -10
+    end
+  end
+
+  describe '#dead' do
+    it 'returns true when hp == 0' do
+      allow(subject).to receive(:hit_points) { 0 }
+      expect(subject).to be_dead
+    end
+
+    it 'returns true when hp less than 0' do
+      allow(subject).to receive(:hit_points) { -1 }
+      expect(subject).to be_dead
+    end
+
+    it 'returns true when hp is above 0' do
+      allow(subject).to receive(:hit_points) { 1 }
+      expect(subject).not_to be_dead
     end
   end
 end
