@@ -3,6 +3,19 @@ describe Game do
   let(:player_2) { instance_double(Player, take_damage: nil, name: 'Abigail') }
   subject        { described_class.new(player_1, player_2) }
 
+  describe '.create' do
+    it 'creates a new instance of game' do
+      expect(described_class.create(player_1, player_2)).to be_a(described_class)
+    end
+  end
+
+  describe '.instance' do
+    it 'returns the instance stored by .create' do
+      game = described_class.create(player_1, player_2)
+      expect(described_class.instance).to be game
+    end
+  end
+
   describe '#attack' do
     it 'reduces hp' do
       expect(player_1).to receive :take_damage
