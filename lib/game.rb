@@ -4,10 +4,10 @@
 class Game
   class << self
     attr_reader :instance
-  end
 
-  def self.create(player1, player2)
-    @instance = Game.new(player1, player2)
+    def create(player1, player2)
+      @instance = new(player1, player2)
+    end
   end
 
   attr_reader :player1, :player2, :other_player, :current_player
