@@ -2,6 +2,8 @@
 
 # holds it's state in class instance var, stores player instances
 class Game
+  attr_reader :player1, :player2, :other_player, :current_player
+
   class << self
     attr_reader :instance
 
@@ -9,8 +11,6 @@ class Game
       @instance = new(player1, player2)
     end
   end
-
-  attr_reader :player1, :player2, :other_player, :current_player
 
   def initialize(player1, player2)
     @player1        = player1
