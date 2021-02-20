@@ -1,7 +1,10 @@
+# frozen_string_literal: true
+
 require 'sinatra'
 require './lib/player'
 require './lib/game'
 
+# controller for battle app class routes
 class Battle < Sinatra::Base
   before { @game = Game.instance }
 
@@ -15,9 +18,9 @@ class Battle < Sinatra::Base
   end
 
   post '/play' do
-    player_1 = Player.new(params[:player_1_name])
-    player_2 = Player.new(params[:player_2_name])
-    @game    = Game.create(player_1, player_2)
+    player1 = Player.new(params[:player_1_name])
+    player2 = Player.new(params[:player_2_name])
+    @game    = Game.create(player1, player2)
     redirect '/play'
   end
 
@@ -43,5 +46,5 @@ class Battle < Sinatra::Base
     erb :game_over
   end
 
-  run! if app_file == $0
+  run! if app_file == $PROGRAM_NAME
 end

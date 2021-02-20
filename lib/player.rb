@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# embodies users of the game
 class Player
   attr_reader :name, :hit_points
 

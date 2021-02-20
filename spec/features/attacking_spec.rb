@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 feature 'attacking' do
   scenario 'player 1 seeing confirmation' do
     sign_up_and_play

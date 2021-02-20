@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 feature 'losing' do
   scenario 'player 2 reaches 0 HP' do
     sign_up_and_play

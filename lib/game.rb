@@ -1,19 +1,22 @@
+# frozen_string_literal: true
+
+# holds it's state in class instance var, stores player instances
 class Game
-  def self.create(player_1, player_2)
-    @game = Game.new(player_1, player_2)
+  def self.create(player1, player2)
+    @instance = Game.new(player1, player2)
   end
 
-  def self.instance
-    @game
+  class << self
+    attr_reader :instance
   end
 
-  attr_reader :player_1, :player_2, :other_player, :current_player
+  attr_reader :player1, :player2, :other_player, :current_player
 
-  def initialize(player_1, player_2)
-    @player_1       = player_1
-    @player_2       = player_2
-    @current_player = player_1
-    @other_player   = player_2
+  def initialize(player1, player2)
+    @player1        = player1
+    @player2        = player2
+    @current_player = player1
+    @other_player   = player2
   end
 
   def attack(player)
@@ -21,11 +24,7 @@ class Game
   end
 
   def switch_turns
-    if current_player == player_1
-      self.current_player, self.other_player = player_2, player_1
-    else
-      self.current_player, self.other_player = player_1, player_2
-    end
+    self.current_player, self.other_player = other_player, current_player
   end
 
   def turn_message
@@ -33,11 +32,11 @@ class Game
   end
 
   def game_over?
-    [player_1, player_2].any? { |player| player.dead? }
+    [player1, player2].any?(&:dead?)
   end
 
   def losing_message
-    loser = [player_1, player_2].select { |player| player.dead? }.pop
+    loser = [player1, player2].select(&:dead?).pop
     "#{loser.name} lost!"
   end
 

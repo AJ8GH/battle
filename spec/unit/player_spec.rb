@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 describe Player do
   subject      { described_class.new('Frank') }
   let(:player) { instance_double(Player, take_damage: nil) }
@@ -16,11 +18,11 @@ describe Player do
 
   describe '#take_damage' do
     it 'reduces hp by 10' do
-      expect { subject.take_damage }.to change { subject.hit_points }.by -10
+      expect { subject.take_damage }.to change { subject.hit_points }.by(-10)
     end
   end
 
-  describe '#dead' do
+  describe '#dead?' do
     it 'returns true when hp == 0' do
       allow(subject).to receive(:hit_points) { 0 }
       expect(subject).to be_dead

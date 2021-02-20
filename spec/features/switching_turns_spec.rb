@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 feature 'switching turns' do
   scenario 'turn indicators' do
     sign_up_and_play
