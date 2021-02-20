@@ -2,12 +2,12 @@
 
 # holds it's state in class instance var, stores player instances
 class Game
-  def self.create(player1, player2)
-    @instance = Game.new(player1, player2)
-  end
-
   class << self
     attr_reader :instance
+  end
+
+  def self.create(player1, player2)
+    @instance = Game.new(player1, player2)
   end
 
   attr_reader :player1, :player2, :other_player, :current_player
