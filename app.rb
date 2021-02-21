@@ -8,11 +8,6 @@ require './lib/game'
 class Battle < Sinatra::Base
   before { @game = Game.instance }
 
-  configure do
-    enable :sessions
-    set    :session_secret, ENV['SESSION_SECRET']
-  end
-
   get '/' do
     erb :index
   end

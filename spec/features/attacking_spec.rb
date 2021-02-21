@@ -8,6 +8,7 @@ feature 'attacking' do
   end
 
   scenario 'reducing player 2 hit points' do
+    allow_any_instance_of(Object).to receive(:rand) { 10 }
     sign_up_and_play
     attack_and_click_ok
     expect(page).not_to have_content 'Abigail: 100 HP'
@@ -22,6 +23,7 @@ feature 'attacking' do
   end
 
   scenario 'reducing player 1 hit points' do
+    allow_any_instance_of(Object).to receive(:rand) { 10 }
     sign_up_and_play
     2.times { attack_and_click_ok }
     expect(page).not_to have_content 'Frank: 100 HP'

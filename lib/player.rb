@@ -12,7 +12,7 @@ class Player
   end
 
   def take_damage
-    self.hit_points -= 10
+    self.hit_points -= rand(5..20)
   end
 
   def dead?
